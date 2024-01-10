@@ -1,0 +1,51 @@
+# DVC pipeline for classifier training
+
+vars:
+  - script_dir: '../../../../../scripts/pipeline'
+  - data_dir: '../../..'
+
+stages:
+
+  split:
+    desc: "Split dataset into training and test subsets"
+    cmd: pdm run python scripts/split.py
+      --infile data/iris.asdf 
+      --trainfile data/train.npz
+      --testfile data/test.npz
+    deps:
+      - data/iris.asdf
+      - scripts/split.py
+    params:
+      - split.rand_seed
+      - split.train_size
+    outs:
+      - data/train.npz
+      - data/test.npz
+
+  train:
+    desc: "Fit classifier to training data"
+    cmd: pdm run python scripts/train.py
+      -i data/train.npz
+      -o models/logistic.pkl
+    deps:
+      - data/train.npz
+      - scripts/train.py
+    params:
+      - train.random_state
+    outs:
+      - models/logistic.pkl
+
+  evaluate:
+    desc: "Evaluate classifier on test and train data"
+    cmd: pdm run python scripts/evaluate.py
+      --trainfile data/train.npz
+      --testfile data/test.npz
+      --modelfile models/logistic.pkl
+      --outfile metrics.json
+    deps:
+      - data/train.npz
+      - data/test.npz
+      - models/logistic.pkl
+      - scripts/evaluate.py
+    metrics:
+      - metrics.json

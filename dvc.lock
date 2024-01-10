@@ -1,0 +1,71 @@
+schema: '2.0'
+stages:
+  split:
+    cmd: pdm run python scripts/split.py --infile data/iris.asdf --trainfile data/train.npz
+      --testfile data/test.npz
+    deps:
+    - path: data/iris.asdf
+      hash: md5
+      md5: 520597023597e0d83c52ba090707063e
+      size: 10210
+    - path: scripts/split.py
+      hash: md5
+      md5: 4c19e3a4798ced25071ec42953a2a203
+      size: 2024
+    params:
+      params.yaml:
+        split.rand_seed: 999
+        split.train_size: 0.8
+    outs:
+    - path: data/test.npz
+      hash: md5
+      md5: 0f2a1ee4cbbed099152422e5766e4862
+      size: 1690
+    - path: data/train.npz
+      hash: md5
+      md5: 0ddf999803b64657ccccbba0d9b92a33
+      size: 5290
+  train:
+    cmd: pdm run python scripts/train.py -i data/train.npz -o models/logistic.pkl
+    deps:
+    - path: data/train.npz
+      hash: md5
+      md5: 0ddf999803b64657ccccbba0d9b92a33
+      size: 5290
+    - path: scripts/train.py
+      hash: md5
+      md5: 4a6bed303e2ff8cf1081b014059df33c
+      size: 1405
+    params:
+      params.yaml:
+        train.random_state: 20120519
+    outs:
+    - path: models/logistic.pkl
+      hash: md5
+      md5: 0d601e962c341f26488ba8363cf38d62
+      size: 991
+  evaluate:
+    cmd: pdm run python scripts/evaluate.py --trainfile data/train.npz --testfile
+      data/test.npz --modelfile models/logistic.pkl --outfile metrics.json
+    deps:
+    - path: data/test.npz
+      hash: md5
+      md5: 0f2a1ee4cbbed099152422e5766e4862
+      size: 1690
+    - path: data/train.npz
+      hash: md5
+      md5: 0ddf999803b64657ccccbba0d9b92a33
+      size: 5290
+    - path: models/logistic.pkl
+      hash: md5
+      md5: 0d601e962c341f26488ba8363cf38d62
+      size: 991
+    - path: scripts/evaluate.py
+      hash: md5
+      md5: dcd8d3a45382e2b55a355868218b63a6
+      size: 2015
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 37e7904c3628aa270464e1f70bdc18c9
+      size: 52

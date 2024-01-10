@@ -1,7 +1,7 @@
 [project]
 name = "dvc_classification"
 version = "0.1.0"
-description = "Default template for PDM package"
+description = "Example DVC repository"
 authors = [
     {name = "Conor McGrory",email = "cpmcgrory@gmail.com"},
 ]
