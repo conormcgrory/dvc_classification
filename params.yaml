@@ -1,0 +1,6 @@
+split:
+  rand_seed: 999
+  train_size: 0.8
+
+train:
+  random_state: 20120519
