@@ -1,6 +1,6 @@
 split:
   rand_seed: 999
-  train_size: 0.8
+  train_size: 0.9
 
 train:
   penalty: l2

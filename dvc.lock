@@ -15,23 +15,23 @@ stages:
     params:
       params.yaml:
         split.rand_seed: 999
-        split.train_size: 0.8
+        split.train_size: 0.9
     outs:
     - path: data/test.npz
       hash: md5
-      md5: 0f2a1ee4cbbed099152422e5766e4862
-      size: 1690
+      md5: 554c660d89850e43f94c3f9d6dd4b3f3
+      size: 1090
     - path: data/train.npz
       hash: md5
-      md5: 0ddf999803b64657ccccbba0d9b92a33
-      size: 5290
+      md5: 0c443ae432ebe0d7ac8b5e2ec8f5acfc
+      size: 5890
   train:
     cmd: pdm run python scripts/train.py -i data/train.npz -o models/logistic.pkl
     deps:
     - path: data/train.npz
       hash: md5
-      md5: 0ddf999803b64657ccccbba0d9b92a33
-      size: 5290
+      md5: 0c443ae432ebe0d7ac8b5e2ec8f5acfc
+      size: 5890
     - path: scripts/train.py
       hash: md5
       md5: 4a6bed303e2ff8cf1081b014059df33c
@@ -42,7 +42,7 @@ stages:
     outs:
     - path: models/logistic.pkl
       hash: md5
-      md5: 28c424f2e1fcfc60e20fa2401039fb07
+      md5: 83152a919d4fcb2e7bcf1d4fb396ea95
       size: 1011
   evaluate:
     cmd: pdm run python scripts/evaluate.py --trainfile data/train.npz --testfile
@@ -50,15 +50,15 @@ stages:
     deps:
     - path: data/test.npz
       hash: md5
-      md5: 0f2a1ee4cbbed099152422e5766e4862
-      size: 1690
+      md5: 554c660d89850e43f94c3f9d6dd4b3f3
+      size: 1090
     - path: data/train.npz
       hash: md5
-      md5: 0ddf999803b64657ccccbba0d9b92a33
-      size: 5290
+      md5: 0c443ae432ebe0d7ac8b5e2ec8f5acfc
+      size: 5890
     - path: models/logistic.pkl
       hash: md5
-      md5: 28c424f2e1fcfc60e20fa2401039fb07
+      md5: 83152a919d4fcb2e7bcf1d4fb396ea95
       size: 1011
     - path: scripts/evaluate.py
       hash: md5
@@ -67,5 +67,5 @@ stages:
     outs:
     - path: metrics.json
       hash: md5
-      md5: 85e2d2ec972ae564a0cdda23545e4afd
-      size: 51
+      md5: 400150e06cb335504f2fea768fec6462
+      size: 65
