@@ -3,12 +3,11 @@ split:
   train_size: 0.8
 
 train:
-  penalty: 'l2'
+  penalty: l2
   tol: 0.00001
   C: 1.0
-  fit_intercept: True
-  random_state: 20120519
-  solver: 'liblinear'
+  fit_intercept: true
+  random_state: 20120901
+  solver: liblinear
   max_iter: 500
-  multi_class: 'auto'
- 
+  multi_class: auto

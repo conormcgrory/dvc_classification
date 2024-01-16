@@ -1,0 +1,4 @@
+[core]
+    remote = jukebox
+['remote "jukebox"']
+    url = ssh://cmcgrory@spock.princeton.edu:/jukebox/tengel/home/mcgrory/r_dvc_classification

@@ -38,12 +38,12 @@ stages:
       size: 1405
     params:
       params.yaml:
-        train.random_state: 20120519
+        train.random_state: 20120901
     outs:
     - path: models/logistic.pkl
       hash: md5
-      md5: 0d601e962c341f26488ba8363cf38d62
-      size: 991
+      md5: 28c424f2e1fcfc60e20fa2401039fb07
+      size: 1011
   evaluate:
     cmd: pdm run python scripts/evaluate.py --trainfile data/train.npz --testfile
       data/test.npz --modelfile models/logistic.pkl --outfile metrics.json
@@ -58,8 +58,8 @@ stages:
       size: 5290
     - path: models/logistic.pkl
       hash: md5
-      md5: 0d601e962c341f26488ba8363cf38d62
-      size: 991
+      md5: 28c424f2e1fcfc60e20fa2401039fb07
+      size: 1011
     - path: scripts/evaluate.py
       hash: md5
       md5: dcd8d3a45382e2b55a355868218b63a6
@@ -67,5 +67,5 @@ stages:
     outs:
     - path: metrics.json
       hash: md5
-      md5: 37e7904c3628aa270464e1f70bdc18c9
-      size: 52
+      md5: 85e2d2ec972ae564a0cdda23545e4afd
+      size: 51
